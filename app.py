@@ -2,6 +2,7 @@ from engine.world import World
 from engine.entity_manager import EntityManager
 from components.position import PositionComponent
 from systems.movement_system import MovementSystem
+from engine.simulation import Simulation
 
 def main():
     world = World()
@@ -14,15 +15,15 @@ def main():
 
     entity = manager.create_entity()
 
-    entity.add_component(PositionComponent(x=10, y=20))
-
-    position = entity.get_component(PositionComponent)
+    entity.add_component(PositionComponent(10, 20))
 
     movement_system = MovementSystem(manager)
-    movement_system.update()
 
-    print(position.x)
-    print(position.y)
+    simulation = Simulation()
+
+    simulation.add_system(movement_system)
+
+    simulation.run(5)
 
 
 
